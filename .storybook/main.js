@@ -8,22 +8,9 @@
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = {
-  presets: [
-    // {
-    //   name: '@storybook/addon-docs/preset',
-    //   options: {
-    //     sourceLoaderOptions: null
-    //   }
-    // }
-  ],
-  stories: ['../stories/overview.stories.mdx', '../stories/**/*.@(js|mdx)'],
-  addons: [
-    '@storybook/addon-docs'
-    // '@storybook/addon-a11y/register',
-    // '@storybook/addon-actions/register',
-    // '@storybook/addon-knobs/register',
-    // '@storybook/addon-links/register'
-  ],
+  stories: ['../stories/**/*.stories.mdx', '../stories/**/*.stories.@(js|jsx|ts|tsx)'],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@whitespace/storybook-addon-html'],
+  framework: '@storybook/web-components',
   webpackFinal: async (config, { configType }) => {
     // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
     // You can change the configuration based on that.
