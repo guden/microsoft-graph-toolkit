@@ -2,23 +2,23 @@
 @import '../../styles/shared-styles.scss';
 @import '../mgt-file-list/mgt-file-list.theme.scss';
 
-$file-item-background-color--hover: set-var(list__item__background-color--hover, $theme-default, $file-list);
-$file-item-background-color--active: set-var(list__item__background-color--active, $theme-default, $file-list);
-$background-color: set-var(list__background-color, $theme-default, $file-list);
-$file-list-border-radius: var(--file-list-border-radius, 4px);
-$file-list-box-shadow: var(
-  --file-list-box-shadow,
-  0px 3.2px 7.2px rgba(0, 0, 0, 0.132),
-  0px 0.6px 1.8px rgba(0, 0, 0, 0.108)
-);
+$file-list-border-radius: var(--file-list-border-radius, 8px);
+$file-list-box-shadow: var(--file-list-box-shadow, var(--elevation-shadow-card-rest));
 $file-list-border: var(--file-list-border, none);
-$file-item-border-radius: var(--file-item-border-radius, 2px);
-$file-item-margin: var(--file-item-margin, 0 4px 0 4px);
+$file-list-padding: var(--file-list-padding, 0);
+$file-list-margin: var(--file-list-margin, 0);
+
 $show-more-button-font-size: var(--show-more-button-font-size, 12px);
-$show-more-button-padding: var(--show-more-button-padding, 6px);
-$show-more-button-border-bottom-right-radius: var(--show-more-button-border-bottom-right-radius, 8px);
-$show-more-button-border-bottom-left-radius: var(--show-more-button-border-bottom-left-radius, 8px);
-$show-more-button-background-color--hover: var(--show-more-button-background-color--hover, $show_more_button_hover);
+$show-more-button-padding: var(--show-more-button-padding, 0px);
+$show-more-button-border-bottom-right-radius: var(
+  --show-more-button-border-bottom-right-radius,
+  $file-list-border-radius
+);
+$show-more-button-border-bottom-left-radius: var(
+  --show-more-button-border-bottom-left-radius,
+  $file-list-border-radius
+);
+
 $progress-ring-size: var(--progress-ring-size, 24px);
 
 :host {
@@ -67,10 +67,10 @@ $progress-ring-size: var(--progress-ring-size, 24px);
     display: contents;
     &:hover > .header,
     &:hover > .cell {
-      background-color: $file-item-background-color--hover;
+      background-color: var(--file-background-color-hover);
 
       .mgt-file-item {
-        --file-background-color: $file-item-background-color--hover;
+        --file-background-color: var(--file-background-color-hover, var(--neutral-layer-2));
       }
       .file-selector {
         border: var(--neutral-foreground-rest) solid 1px;
@@ -86,9 +86,9 @@ $progress-ring-size: var(--progress-ring-size, 24px);
   }
 
   .selected {
-    background-color: $file-item-background-color--active;
+    background-color: var(--file-background-color-active, var(--neutral-layer-3));
     .mgt-file-item {
-      --file-background-color: $file-item-background-color--active;
+      --file-background-color: var(--file-background-color-active, var(--neutral-layer-3));
     }
   }
   .file-selector {
