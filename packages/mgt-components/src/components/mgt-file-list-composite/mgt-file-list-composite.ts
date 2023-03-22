@@ -243,12 +243,17 @@ class MgtFileListComposite extends MgtFileListBase {
   private handleItemClick(e: CustomEvent<DriveItem>): void {
     const item = e.detail;
     if (item.folder) {
+      // when clicking on a folder the user is navigating into that DriveItem
+      // the next state should use the /drives/{drive-id}/items/{item-id}/children endpoint
+      // this works for items loaded via any initial query context
       // load folder contents, update breadcrumb
-      this.breadcrumb = [...this.breadcrumb, { name: item.name, itemId: item.id, id: item.id }];
+      this.breadcrumb = [
+        ...this.breadcrumb,
+        { name: item.name, itemId: item.id, id: item.id, driveId: item.parentReference.driveId }
+      ];
       // clear any existing query properties
       this.siteId = null;
       this.groupId = null;
-      this.driveId = null;
       this.userId = null;
       this.files = null;
       this.fileExtensions = null;
@@ -256,8 +261,9 @@ class MgtFileListComposite extends MgtFileListBase {
       this.fileQueries = null;
       this.itemPath = null;
       this.insightType = null;
-      // set the item id to load the folder
+      // set the item id and the drive id to load the folder contents
       this.itemId = item.id;
+      this.driveId = item.parentReference.driveId;
       this.fireCustomEvent('itemClick', item);
     }
   }
